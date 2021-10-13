@@ -5,7 +5,6 @@ header('Content-Type: text/html; charset=utf-8');
 
 echo '<pre>'.print_r($_GET,1).'</pre>';
 
-
 if ($_GET['num1'] == '' ||$_GET['num2']== ''){
 	 $calculation = "Вы не ввели одно из значений";
 } elseif (empty ($_GET['action'])){
