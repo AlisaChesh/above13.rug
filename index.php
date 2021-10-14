@@ -5,18 +5,18 @@ header('Content-Type: text/html; charset=utf-8');
 
 echo '<pre>'.print_r($_GET,1).'</pre>';
 
-if ($_GET['num1'] == '' ||$_GET['num2']== ''){
-	 $calculation = "Вы не ввели одно из значений";
-} elseif (empty ($_GET['action'])){
-	$calculation ="Вы не указвли действие ";
-}elseif (isset ($_GET['num1'],$_GET['num2'],$_GET['action'])) {
+if (isset ($_GET['num1'],$_GET['num2'],$_GET['action'])) {
 	echo calculator($_GET['num1'], $_GET['num2'], $_GET['action']);
 	$sum = calculator($_GET['num1'], $_GET['num2'], $_GET['action']);
 	$calculation = $_GET['num1'].' '.$_GET['action'].' '.$_GET['num2'].' = '.$sum;
+} elseif (empty ($_GET['action'])){
+	$calculation = "Вы не указали математическое действие";
 }
 
 function calculator ($num1, $num2, $action) {
-	if($action == "+") {
+	if ($num1 == "" || $num2 == ""){
+		return "Вы не ввели какое-то из значений ";
+	} elseif($action == "+") {
 		return ($num1 + $num2);
 	}elseif($action == "-") {
 		return ($num1 - $num2);
@@ -44,12 +44,7 @@ function calculator ($num1, $num2, $action) {
 		<label>Умножить<input type="radio" name="action" value="*"></label>
 		<label>Поделить<input type="radio" name="action" value="/"></label>
 	</div>
-	<br><div><input type="submit" value="Посчитать"</div><br>
+	<br><div><input type="submit" name="submit" value="Посчитать"</div><br>
 	<br><textarea>Ответ:<?= $calculation ?></textarea>
 
 </form>
-
-
-
-
-
